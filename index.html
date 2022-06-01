@@ -2,15 +2,54 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Play Snake!</title>
+
+    <link rel="stylesheet" href="src/stylesheet.css">
 </head>
 
 <body>
     <!-- Centered div -->
-    <div style="text-align: center;">
+    <div class="container">
         <h1>Play Snake!</h1>
+
+        <!-- Game canvas - The drawable region -->
         <canvas id="canvas" width="400" height="400"></canvas>
-        <script src="src/snake.js"></script>
+
+        <!-- Controls -->
+
+        <table>
+            <!-- Speed input -->
+            <tr>
+                <td>
+                    <label>Draw speed</label>
+                </td>
+                <td>
+                    <input id="speed" type="range" min="5" max="30" value="15">
+                </td>
+            </tr>
+            <!-- Score readout -->
+            <tr>
+                <td>
+                    <label><b>Score</b></label>
+                </td>
+                <td>
+                    <output id="score">0</output>
+                </td>
+            </tr>
+        </table>
+
+
+
+        <!-- Scripts -->
+        <!-- Object files -->
+        <script src="src/Snake.js"></script>
+        <script src="src/Apple.js"></script>
+
+        <!-- Script files -->
+        <script src="src/index.js"></script>
     </div>
 </body>
 

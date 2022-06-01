@@ -1,0 +1,12 @@
+/* Primary item container */
+div.container {
+    text-align: center;
+}
+
+table {
+    margin: auto;
+}
+
+output, label {
+    font: 1rem "Fira Sans", sans-serif;
+}
