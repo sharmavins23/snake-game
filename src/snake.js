@@ -36,4 +36,33 @@ class Snake {
         this.tail.shift()
         this.tail.push(newRect);
     }
+
+    eatApple(apple) {
+        let snakeHead = this.tail[this.tail.length - 1];
+
+        // If we find a collision with the apple object...
+        if (snakeHead.x == apple.x && snakeHead.y == apple.y) {
+            this.tail[this.tail.length] = {
+                x: apple.x,
+                y: apple.y
+            }
+            return new Apple();
+        } else {
+            return apple; // We didn't need to update the old apple
+        }
+    }
+
+    checkHitWall() {
+        let snakeHead = this.tail[this.tail.length - 1];
+
+        if (snakeHead.x == - this.size) {
+            snakeHead.x = canvas.width - this.size;
+        } else if (snakeHead.x == canvas.width) {
+            snakeHead.x = 0;
+        } else if (snakeHead.y == - this.size) {
+            snakeHead.y = canvas.height - this.size;
+        } else if (snakeHead.y == canvas.height) {
+            snakeHead.y = 0;
+        }
+    }
 }
