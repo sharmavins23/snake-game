@@ -17,11 +17,11 @@ function gameLoop() {
 }
 
 function show() {
-    update();
+    updateCanvas();
     draw();
 }
 
-function update() {
+function updateCanvas() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     snake.move();
 
