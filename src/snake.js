@@ -6,9 +6,9 @@ class Snake {
         this.tail = [{ x: this.x, y: this.y }]
         this.rotateX = 0
         this.rotateY = 1
-
     }
 
+    // Move the snake according to the rotation and the current positioning
     move() {
         var newRect;
         if (this.rotateX == 1) {
@@ -33,8 +33,8 @@ class Snake {
             }
         }
 
-        this.tail.shift()
-        this.tail.push(newRect);
+        this.tail.shift() // Remove the old tail
+        this.tail.push(newRect); // Place the new head
     }
 
     eatApple(apple) {

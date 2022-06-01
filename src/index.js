@@ -2,52 +2,80 @@
 
 
 var canvas = document.getElementById("canvas");
+var score = document.getElementById("score");
+var canvasContext = canvas.getContext("2d"); // Used for drawing objects
+
 var snake = new Snake(20, 20, 20);
 var apple = new Apple();
-var canvasContext = canvas.getContext("2d");
-const fps = 10;
+const fps = 15;
 
+// ===== Recurring window events ===============================================
+
+// On page load, start the game
 window.onload = () => {
     gameLoop();
 
 }
 
+// Loop the game with updating the canvas, score, and redrawing the board
 function gameLoop() {
-    setInterval(show, 1000 / fps);
+    setInterval(() => {
+        updateCanvas();
+        updateScore();
+        draw();
+    }, 1000 / fps);
 }
 
-function show() {
-    updateCanvas();
-    draw();
+function updateScore() {
+    score.innerHTML = snake.tail.length;
 }
 
 function updateCanvas() {
+    // Clear the board
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    snake.move();
 
+    // Update the snake's positioning
+    snake.move();
+    // Check for a collision with an apple
     apple = snake.eatApple(apple);
+    // Check for a collision with the wall
     snake.checkHitWall();
 
 }
 
 function draw() {
+    // Create the board
     createRect(0, 0, canvas.width, canvas.height, "black")
-    createRect(0, 0, canvas.width, canvas.height)
+
+    // Draw the full snake body
     for (var i = 0; i < snake.tail.length; i++) {
-        createRect(snake.tail[i].x + 2.5, snake.tail[i].y + 2.5, snake.size - 5, snake.size - 5, "white")
+        createRect(
+            snake.tail[i].x + 2.5,
+            snake.tail[i].y + 2.5,
+            snake.size - 5,
+            snake.size - 5,
+            "white"
+        )
     }
 
-    canvasContext.font = "20px Arial";
-    canvasContext.fillStyle = "#00FF42";
-    canvasContext.fillText("Score: " + (snake.tail.length + 1), canvas.width - 120, 18);
-
-    createRect(apple.x, apple.y, apple.size, apple.size, apple.color);
+    // Create the apple on the screen
+    createRect(
+        apple.x,
+        apple.y,
+        apple.size,
+        apple.size,
+        apple.color
+    );
 }
+
+// ===== Board drawing handlers ================================================
 
 function createRect(x, y, width, height, color) {
     canvasContext.fillStyle = color;
     canvasContext.fillRect(x, y, width, height);
 }
+
+// ===== Event handlers ========================================================
 
 window.addEventListener("keydown", (event) => {
     let pressedKey = event.key; // Save the pressed key

@@ -2,6 +2,7 @@ class Apple {
     constructor() {
         var isTouching;
 
+        // Re-place until the apple is not placed atop the snake
         while (true) {
             isTouching = false;
             this.x = Math.floor(Math.random() * canvas.width / snake.size) * snake.size;
@@ -17,7 +18,6 @@ class Apple {
             if (!isTouching) {
                 break;
             }
-
         }
     }
 }
